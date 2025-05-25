@@ -1,3 +1,15 @@
+import subprocess
+import os
+import pathlib
+
+def ensure_chromium_installed():
+    chromium_path = pathlib.Path.home() / ".cache" / "ms-playwright" / "chromium-*"
+    if not chromium_path.exists():
+        print("🔧 Installing Chromium...")
+        subprocess.run(["playwright", "install", "chromium", "--with-deps"], check=True)
+
+ensure_chromium_installed()
+
 import streamlit as st
 from pathlib import Path
 from playwright_script import run_capture  # make sure to rename your main script to playwright_script.py
